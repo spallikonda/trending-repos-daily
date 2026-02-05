@@ -1,0 +1,186 @@
+{
+  "2026-02-06": [
+    {
+      "name": "microsoft/semantic-kernel",
+      "url": "https://github.com/microsoft/semantic-kernel",
+      "description": "Integrate cutting-edge LLM technology quickly and easily into your apps",
+      "stars": 18234,
+      "forks": 2145,
+      "language": "C#",
+      "stars_today": 342
+    },
+    {
+      "name": "openai/openai-python",
+      "url": "https://github.com/openai/openai-python",
+      "description": "The official Python library for the OpenAI API",
+      "stars": 19876,
+      "forks": 2654,
+      "language": "Python",
+      "stars_today": 298
+    },
+    {
+      "name": "vercel/ai",
+      "url": "https://github.com/vercel/ai",
+      "description": "Build AI-powered applications with React, Svelte, Vue, and Solid",
+      "stars": 12543,
+      "forks": 1432,
+      "language": "TypeScript",
+      "stars_today": 276
+    },
+    {
+      "name": "langchain-ai/langchain",
+      "url": "https://github.com/langchain-ai/langchain",
+      "description": "Build context-aware reasoning applications with LangChain",
+      "stars": 78234,
+      "forks": 11234,
+      "language": "Python",
+      "stars_today": 245
+    },
+    {
+      "name": "anthropics/anthropic-sdk-python",
+      "url": "https://github.com/anthropics/anthropic-sdk-python",
+      "description": "Official Python SDK for Claude API",
+      "stars": 3456,
+      "forks": 432,
+      "language": "Python",
+      "stars_today": 189
+    },
+    {
+      "name": "f/awesome-chatgpt-prompts",
+      "url": "https://github.com/f/awesome-chatgpt-prompts",
+      "description": "Curated list of ChatGPT and AI prompts",
+      "stars": 95432,
+      "forks": 12876,
+      "language": "Markdown",
+      "stars_today": 167
+    },
+    {
+      "name": "supabase/supabase",
+      "url": "https://github.com/supabase/supabase",
+      "description": "The open source Firebase alternative",
+      "stars": 61234,
+      "forks": 5678,
+      "language": "TypeScript",
+      "stars_today": 156
+    },
+    {
+      "name": "shadcn-ui/ui",
+      "url": "https://github.com/shadcn-ui/ui",
+      "description": "Beautifully designed components built with Radix UI and Tailwind CSS",
+      "stars": 47890,
+      "forks": 2345,
+      "language": "TypeScript",
+      "stars_today": 142
+    },
+    {
+      "name": "pytorch/pytorch",
+      "url": "https://github.com/pytorch/pytorch",
+      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+      "stars": 73456,
+      "forks": 19876,
+      "language": "Python",
+      "stars_today": 128
+    },
+    {
+      "name": "microsoft/vscode",
+      "url": "https://github.com/microsoft/vscode",
+      "description": "Visual Studio Code",
+      "stars": 151234,
+      "forks": 26543,
+      "language": "TypeScript",
+      "stars_today": 115
+    }
+  ],
+  "2026-02-05": [
+    {
+      "name": "langchain-ai/langchain",
+      "url": "https://github.com/langchain-ai/langchain",
+      "description": "Build context-aware reasoning applications with LangChain",
+      "stars": 77989,
+      "forks": 11198,
+      "language": "Python",
+      "stars_today": 312
+    },
+    {
+      "name": "openai/openai-python",
+      "url": "https://github.com/openai/openai-python",
+      "description": "The official Python library for the OpenAI API",
+      "stars": 19578,
+      "forks": 2632,
+      "language": "Python",
+      "stars_today": 289
+    },
+    {
+      "name": "microsoft/semantic-kernel",
+      "url": "https://github.com/microsoft/semantic-kernel",
+      "description": "Integrate cutting-edge LLM technology quickly and easily into your apps",
+      "stars": 17892,
+      "forks": 2123,
+      "language": "C#",
+      "stars_today": 267
+    },
+    {
+      "name": "f/awesome-chatgpt-prompts",
+      "url": "https://github.com/f/awesome-chatgpt-prompts",
+      "description": "Curated list of ChatGPT and AI prompts",
+      "stars": 95265,
+      "forks": 12834,
+      "language": "Markdown",
+      "stars_today": 234
+    },
+    {
+      "name": "vercel/ai",
+      "url": "https://github.com/vercel/ai",
+      "description": "Build AI-powered applications with React, Svelte, Vue, and Solid",
+      "stars": 12267,
+      "forks": 1421,
+      "language": "TypeScript",
+      "stars_today": 198
+    },
+    {
+      "name": "supabase/supabase",
+      "url": "https://github.com/supabase/supabase",
+      "description": "The open source Firebase alternative",
+      "stars": 61078,
+      "forks": 5654,
+      "language": "TypeScript",
+      "stars_today": 176
+    },
+    {
+      "name": "anthropics/anthropic-sdk-python",
+      "url": "https://github.com/anthropics/anthropic-sdk-python",
+      "description": "Official Python SDK for Claude API",
+      "stars": 3267,
+      "forks": 421,
+      "language": "Python",
+      "stars_today": 165
+    },
+    {
+      "name": "pytorch/pytorch",
+      "url": "https://github.com/pytorch/pytorch",
+      "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+      "stars": 73328,
+      "forks": 19854,
+      "language": "Python",
+      "stars_today": 154
+    },
+    {
+      "name": "shadcn-ui/ui",
+      "url": "https://github.com/shadcn-ui/ui",
+      "description": "Beautifully designed components built with Radix UI and Tailwind CSS",
+      "stars": 47748,
+      "forks": 2334,
+      "language": "TypeScript",
+      "stars_today": 143
+    },
+    {
+      "name": "microsoft/vscode",
+      "url": "https://github.com/microsoft/vscode",
+      "description": "Visual Studio Code",
+      "stars": 151119,
+      "forks": 26521,
+      "language": "TypeScript",
+      "stars_today": 132
+    }
+  ]
+}
