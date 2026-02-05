@@ -4,241 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Trending Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
         }
 
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .controls {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            border: none;
-            background: #f0f0f0;
-            cursor: pointer;
-            border-radius: 6px;
-            font-size: 1em;
-            transition: all 0.3s;
-        }
-
-        .tab.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .tab:hover {
-            transform: translateY(-2px);
-        }
-
-        .date-selector {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        select {
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-        }
-
-        .repo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .repo-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .repo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
-        }
-
-        .rank {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #667eea;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        .repo-name {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            padding-right: 45px;
-        }
-
-        .repo-name a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .repo-name a:hover {
-            text-decoration: underline;
-        }
-
-        .repo-description {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .repo-stats {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #666;
-        }
-
-        .stat-icon {
-            font-size: 1.1em;
-        }
-
-        .language {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #f0f0f0;
-            border-radius: 12px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-
-        .loading {
-            text-align: center;
-            color: white;
-            font-size: 1.5em;
-            padding: 50px;
-        }
-
-        .error {
-            background: #ff6b6b;
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .chart-container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .last-updated {
-            text-align: center;
-            color: white;
-            margin-top: 20px;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            
-            .repo-grid {
-                grid-template-columns: 1fr;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .rank-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-badge {
+            transition: all 0.2s;
+        }
+
+        .stat-badge:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📊 GitHub Trending Tracker</h1>
-            <p class="subtitle">Daily updated trending repositories with historical data</p>
+<body class="gradient-bg min-h-screen">
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        
+        <!-- Header -->
+        <header class="text-center mb-8 sm:mb-12 lg:mb-16 fade-in-up">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 drop-shadow-lg">
+                📊 GitHub Trending Tracker
+            </h1>
+            <p class="text-base sm:text-lg lg:text-xl text-white/90 font-light">
+                Daily updated trending repositories with historical data
+            </p>
         </header>
 
-        <div class="controls">
-            <div class="tabs">
-                <button class="tab active" data-view="today">Today's Top 10</button>
-                <button class="tab" data-view="history">Historical View</button>
+        <!-- Controls Card -->
+        <div class="glass-effect rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 lg:mb-12 shadow-2xl fade-in-up">
+            <!-- Tabs -->
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
+                <button 
+                    class="tab px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 bg-gradient-to-r from-primary to-secondary text-white shadow-lg hover:shadow-xl transform hover:scale-105 active" 
+                    data-view="today"
+                >
+                    <span class="hidden sm:inline">🏆 Today's Top 10</span>
+                    <span class="sm:hidden">🏆 Today</span>
+                </button>
+                <button 
+                    class="tab px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 bg-gray-100 text-gray-700 hover:bg-gray-200 transform hover:scale-105" 
+                    data-view="history"
+                >
+                    <span class="hidden sm:inline">📅 Historical View</span>
+                    <span class="sm:hidden">📅 History</span>
+                </button>
             </div>
             
-            <div class="date-selector" id="dateSelector" style="display: none;">
-                <label for="dateSelect">Select Date:</label>
-                <select id="dateSelect"></select>
+            <!-- Date Selector -->
+            <div class="hidden" id="dateSelector">
+                <label for="dateSelect" class="block text-sm sm:text-base font-semibold text-gray-700 mb-2 sm:mb-3">
+                    Select Date:
+                </label>
+                <select 
+                    id="dateSelect" 
+                    class="w-full sm:w-auto px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base rounded-xl sm:rounded-2xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none transition-all cursor-pointer bg-white"
+                ></select>
             </div>
         </div>
 
+        <!-- Content Area -->
         <div id="content">
-            <div class="loading">Loading trending repositories...</div>
+            <div class="text-center py-12 sm:py-20 fade-in-up">
+                <div class="inline-block">
+                    <div class="animate-spin rounded-full h-16 w-16 sm:h-20 sm:w-20 border-b-4 border-white mb-4"></div>
+                    <p class="text-white text-lg sm:text-xl lg:text-2xl font-semibold">Loading trending repositories...</p>
+                </div>
+            </div>
         </div>
 
-        <div class="last-updated" id="lastUpdated"></div>
+        <!-- Last Updated -->
+        <div id="lastUpdated" class="text-center mt-8 sm:mt-12 text-white/80 text-sm sm:text-base font-medium"></div>
     </div>
 
     <script>
@@ -260,9 +149,10 @@
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('content').innerHTML = `
-                    <div class="error">
-                        <h2>Error Loading Data</h2>
-                        <p>Could not load trending repositories. Please try again later.</p>
+                    <div class="glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 text-center shadow-2xl max-w-2xl mx-auto fade-in-up">
+                        <div class="text-5xl sm:text-6xl mb-4">❌</div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-red-600 mb-3 sm:mb-4">Error Loading Data</h2>
+                        <p class="text-base sm:text-lg text-gray-600">Could not load trending repositories. Please try again later.</p>
                     </div>
                 `;
             }
@@ -272,15 +162,20 @@
         function setupEventListeners() {
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.addEventListener('click', (e) => {
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    e.target.classList.add('active');
+                    document.querySelectorAll('.tab').forEach(t => {
+                        t.classList.remove('bg-gradient-to-r', 'from-primary', 'to-secondary', 'text-white', 'shadow-lg', 'active');
+                        t.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    e.target.classList.remove('bg-gray-100', 'text-gray-700');
+                    e.target.classList.add('bg-gradient-to-r', 'from-primary', 'to-secondary', 'text-white', 'shadow-lg', 'active');
+                    
                     currentView = e.target.dataset.view;
                     
                     if (currentView === 'today') {
-                        document.getElementById('dateSelector').style.display = 'none';
+                        document.getElementById('dateSelector').classList.add('hidden');
                         displayTodaysTrending();
                     } else {
-                        document.getElementById('dateSelector').style.display = 'flex';
+                        document.getElementById('dateSelector').classList.remove('hidden');
                         populateDateSelector();
                         displayHistoricalView();
                     }
@@ -294,7 +189,11 @@
         function displayTodaysTrending() {
             const dates = Object.keys(allData).sort().reverse();
             if (dates.length === 0) {
-                document.getElementById('content').innerHTML = '<div class="error">No data available</div>';
+                document.getElementById('content').innerHTML = `
+                    <div class="glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center shadow-2xl max-w-2xl mx-auto">
+                        <p class="text-lg sm:text-xl text-gray-600">No data available</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -324,49 +223,79 @@
         // Display repository cards
         function displayRepos(repos, date) {
             if (!repos || repos.length === 0) {
-                document.getElementById('content').innerHTML = '<div class="error">No repositories found for this date</div>';
+                document.getElementById('content').innerHTML = `
+                    <div class="glass-effect rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center shadow-2xl max-w-2xl mx-auto">
+                        <p class="text-lg sm:text-xl text-gray-600">No repositories found for this date</p>
+                    </div>
+                `;
                 return;
             }
 
             const html = `
-                <div class="repo-grid">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     ${repos.map((repo, index) => `
-                        <div class="repo-card">
-                            <div class="rank">${index + 1}</div>
-                            <div class="repo-name">
-                                <a href="${repo.url}" target="_blank">${repo.name}</a>
+                        <div class="glass-effect rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 shadow-xl hover-lift relative overflow-hidden fade-in-up" style="animation-delay: ${index * 0.1}s">
+                            <!-- Rank Badge -->
+                            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 rank-badge text-white w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center font-bold text-base sm:text-lg lg:text-xl shadow-lg">
+                                ${index + 1}
                             </div>
-                            <div class="repo-description">
+                            
+                            <!-- Repo Name -->
+                            <div class="mb-3 sm:mb-4 pr-12 sm:pr-16">
+                                <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary hover:text-secondary transition-colors line-clamp-2 block">
+                                    ${repo.name}
+                                </a>
+                            </div>
+                            
+                            <!-- Description -->
+                            <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
                                 ${repo.description || 'No description available'}
-                            </div>
-                            <div class="repo-stats">
-                                <div class="stat">
-                                    <span class="stat-icon">⭐</span>
-                                    <span>${formatNumber(repo.stars)}</span>
+                            </p>
+                            
+                            <!-- Stats -->
+                            <div class="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
+                                <div class="stat-badge flex items-center gap-1.5 sm:gap-2 bg-yellow-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl">
+                                    <span class="text-base sm:text-lg lg:text-xl">⭐</span>
+                                    <span class="font-semibold text-yellow-700 text-xs sm:text-sm lg:text-base">${formatNumber(repo.stars)}</span>
                                 </div>
-                                <div class="stat">
-                                    <span class="stat-icon">🔀</span>
-                                    <span>${formatNumber(repo.forks)}</span>
+                                <div class="stat-badge flex items-center gap-1.5 sm:gap-2 bg-blue-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl">
+                                    <span class="text-base sm:text-lg lg:text-xl">🔀</span>
+                                    <span class="font-semibold text-blue-700 text-xs sm:text-sm lg:text-base">${formatNumber(repo.forks)}</span>
                                 </div>
                                 ${repo.stars_today ? `
-                                <div class="stat">
-                                    <span class="stat-icon">📈</span>
-                                    <span>${formatNumber(repo.stars_today)} today</span>
+                                <div class="stat-badge flex items-center gap-1.5 sm:gap-2 bg-green-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl">
+                                    <span class="text-base sm:text-lg lg:text-xl">📈</span>
+                                    <span class="font-semibold text-green-700 text-xs sm:text-sm lg:text-base">${formatNumber(repo.stars_today)} today</span>
                                 </div>
                                 ` : ''}
                             </div>
-                            ${repo.language ? `<div class="language">${repo.language}</div>` : ''}
+                            
+                            <!-- Language -->
+                            ${repo.language ? `
+                            <div class="inline-block">
+                                <span class="bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold border border-primary/20">
+                                    ${repo.language}
+                                </span>
+                            </div>
+                            ` : ''}
                         </div>
                     `).join('')}
                 </div>
             `;
 
             document.getElementById('content').innerHTML = html;
-            document.getElementById('lastUpdated').textContent = `Last updated: ${formatDate(date)}`;
+            document.getElementById('lastUpdated').innerHTML = `
+                <span class="inline-block bg-white/20 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl">
+                    Last updated: ${formatDate(date)}
+                </span>
+            `;
         }
 
         // Utility functions
         function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            }
             if (num >= 1000) {
                 return (num / 1000).toFixed(1) + 'k';
             }
